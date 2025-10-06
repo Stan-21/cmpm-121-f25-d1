@@ -11,7 +11,13 @@ const buttonElement = document.getElementById("button")!;
 
 let counter = 0;
 
+setInterval(click, 1000);
+
 buttonElement.addEventListener("click", () => {
+  click();
+});
+
+function click() {
   counter += 1;
   counterElement.innerHTML = counter.toString();
-});
+}
