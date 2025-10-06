@@ -1,7 +1,17 @@
-import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
 document.body.innerHTML = `
-  <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-  <button> This is a button 🙃 </button>
+  <h1> CMPM 121 Project </h1>
+  <p> Rocks Collected: <span id="counter"> 0 </span></p>
+  <button id = "button"> This is a button 🪨 </button>
 `;
+
+const counterElement = document.getElementById("counter")!;
+const buttonElement = document.getElementById("button")!;
+
+let counter = 0;
+
+buttonElement.addEventListener("click", () => {
+  counter += 1;
+  counterElement.innerHTML = counter.toString();
+});
