@@ -30,3 +30,5 @@ function click() {
 }
 
 requestAnimationFrame(autoClick);
+
+console.log("my internet is no longer dead lets goooo");
