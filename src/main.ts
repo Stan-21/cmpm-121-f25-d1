@@ -27,7 +27,6 @@ function autoClick() {
 function click() {
   counter += 1;
   counterElement.innerHTML = counter.toString();
-  console.log("ඞmongus", counter)
 }
 
 requestAnimationFrame(autoClick);
