@@ -10,14 +10,23 @@ const counterElement = document.getElementById("counter")!;
 const buttonElement = document.getElementById("button")!;
 
 let counter = 0;
-
-setInterval(click, 1000);
+let last = performance.now();
 
 buttonElement.addEventListener("click", () => {
   click();
 });
 
+function autoClick() {
+  if ((performance.now() - last) > 1000) {
+    click();
+    last = performance.now();
+  }
+  requestAnimationFrame(autoClick);
+}
+
 function click() {
   counter += 1;
   counterElement.innerHTML = counter.toString();
 }
+
+requestAnimationFrame(autoClick);
