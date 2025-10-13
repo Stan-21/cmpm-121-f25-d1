@@ -17,6 +17,7 @@ interface Upgrade {
   name: string;
   cost: number;
   rate: number;
+  count: number;
   element: HTMLButtonElement | HTMLElement;
 }
 
@@ -29,48 +30,26 @@ const drillUpgrade = document.getElementById("drillUpgrade")!;
 const bombUpgrade = document.getElementById("bombUpgrade")!;
 
 const availableItems: Upgrade[] = [
-  { name: "pick", cost: 10, rate: 0.1, element: pickUpgrade },
-  { name: "drill", cost: 100, rate: 2, element: drillUpgrade },
-  { name: "bomb", cost: 1000, rate: 50, element: bombUpgrade },
+  { name: "Auto Pick", cost: 10, rate: 0.1, count: 0, element: pickUpgrade },
+  { name: "Driller", cost: 100, rate: 2, count: 0, element: drillUpgrade },
+  { name: "Bomber", cost: 1000, rate: 50, count: 0, element: bombUpgrade },
 ];
 
+availableItems.forEach((item) => {
+  item.element.addEventListener("click", () => {
+    item.count += 1;
+    counter -= item.cost;
+    item.cost = Math.round(item.cost * 1.15); // Calculate new cost
+    item.element.innerText =
+      `${item.name} (${item.cost} rocks) (x${item.count})`;
+    minePower += item.rate;
+  });
+});
+
 let counter = 0;
-let autoMineCount = 0;
-let drillerCount = 0;
-let bomberCount = 0;
 
 buttonElement.addEventListener("click", () => {
   click();
-});
-
-pickUpgrade.addEventListener("click", () => {
-  autoMineCount += 1;
-  availableItems[0].cost = Math.round(availableItems[0].cost * 1.15);
-  pickUpgrade.innerText = `Auto Pick (${
-    availableItems[0].cost
-  } rocks) (x${autoMineCount})`;
-  counter -= 10;
-  minePower += 0.1;
-});
-
-drillUpgrade.addEventListener("click", () => {
-  drillerCount += 1;
-  availableItems[1].cost = Math.round(availableItems[1].cost * 1.15);
-  drillUpgrade.innerText = `Driller (${
-    availableItems[1].cost
-  } rocks) (x${drillerCount})`;
-  counter -= 100;
-  minePower += 2;
-});
-
-bombUpgrade.addEventListener("click", () => {
-  bomberCount += 1;
-  availableItems[2].cost = Math.round(availableItems[2].cost * 1.15);
-  bombUpgrade.innerText = `Bomber (${
-    availableItems[2].cost
-  } rocks) (x${bomberCount})`;
-  counter -= 1000;
-  minePower += 50;
 });
 
 function tick() {
