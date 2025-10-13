@@ -59,6 +59,15 @@ const availableItems: Upgrade[] = [
     count: 0,
     element: null,
   },
+  {
+    name: "Nuclear Bomber",
+    description:
+      "This doesn't seem safe...  For maniacs who want to see big numbers.  +1000 rocks per second",
+    cost: 10000,
+    rate: 1000,
+    count: 0,
+    element: null,
+  },
 ];
 
 availableItems.forEach((item) => {
@@ -108,11 +117,11 @@ function tick() {
     }
   }
 
-  if (counter >= 10000 && !finalUpgradeFlag) {
+  if (counter >= 50000 && !finalUpgradeFlag) {
     finalUpgradeFlag = true;
     const newText = document.createElement("div");
     newText.textContent =
-      "A new possible upgrade appears...  It's an even bigger bomb.  Buy it (10000 rocks)?  ";
+      "A new possible upgrade appears...  It's an even bigger bomb.  Buy it (50000 rocks)?  ";
     document.body.append(newText);
 
     yesButton = document.createElement("button");
