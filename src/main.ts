@@ -6,23 +6,7 @@ document.body.innerHTML = `
   <p> Mining Rate: <span id="status"> 0 rocks/sec </span></p>
   <button id = "rock"> 🪨 </button>
   <button id = "button"> ⛏️⛏️ </button>
-  <p>
-    <div class = "tooltip">
-      <button id = "pickUpgrade" class = "upgrade"> Auto Pick (10 rocks) (x0) </button>
-      <span class = "tooltiptext"> An auto pick! +0.1 rocks per second </span>
-    </div>
-    <div class = "tooltip">
-      <button id = "drillUpgrade" class = "upgrade"> Driller (100 rocks) (x0) </button>
-      <span class = "tooltiptext"> Drill goes burr. +2 rocks per second </span>
-    </div>
-    <div class = "tooltip">
-      <button id = "bombUpgrade" class = "upgrade"> Bomber (1000 rocks) (x0) </button>
-      <span class = "tooltiptext"> Small boom.  + 50 rocks per second </span>
-    </div>
-    <div class = "tooltip">
-      <button id = "bigUpgrade" class = "upgrade"> Bigger Bomber (5000 rocks) (x0) </button>
-      <span class = "tooltiptext"> Bigger boom.  + 400 rocks per second </span>
-    </div>
+  <p id = "upgradeList">
   </p>
 `;
 
@@ -32,61 +16,76 @@ interface Upgrade {
   cost: number;
   rate: number;
   count: number;
-  element: HTMLButtonElement | HTMLElement;
+  element: HTMLButtonElement | null;
 }
 
 const counterElement = document.getElementById("counter")!;
 const statusElement = document.getElementById("status")!;
 const buttonElement = document.getElementById("button")!;
 
-const pickUpgrade = document.getElementById("pickUpgrade")!;
-const drillUpgrade = document.getElementById("drillUpgrade")!;
-const bombUpgrade = document.getElementById("bombUpgrade")!;
-const biggerUpgrade = document.getElementById("bigUpgrade")!;
+const upgradeList = document.getElementById("upgradeList")!;
 
 const availableItems: Upgrade[] = [
   {
     name: "Auto Pick",
-    description: "An auto pick!  Slow, but does the trick!",
+    description:
+      "An auto pick!  Slow, but does the trick! +0.1 rocks per second",
     cost: 10,
     rate: 0.1,
     count: 0,
-    element: pickUpgrade,
+    element: null,
   },
   {
     name: "Driller",
-    description: "Drill goes burrr",
+    description: "Drill goes burrrrrr... +2 rocks per second",
     cost: 100,
     rate: 2,
     count: 0,
-    element: drillUpgrade,
+    element: null,
   },
   {
     name: "Bomber",
-    description: "Small boom",
+    description: "Small boom! +50 rocks per second",
     cost: 1000,
     rate: 50,
     count: 0,
-    element: bombUpgrade,
+    element: null,
   },
   {
     name: "Bigger Bomber",
-    description: "Bigger boom",
+    description: "Bigger boom!! +400 rocks per second",
     cost: 5000,
     rate: 400,
     count: 0,
-    element: biggerUpgrade,
+    element: null,
   },
 ];
 
 availableItems.forEach((item) => {
+  const toolTip = document.createElement("div");
+  toolTip.className = "tooltip";
+  upgradeList.append(toolTip);
+
+  const upgrade = document.createElement("button");
+  upgrade.className = "upgrade";
+  upgrade.innerText = `${item.name} (${item.cost} rocks) (x${item.count})`;
+  toolTip.append(upgrade);
+
+  const upgradeDescription = document.createElement("span");
+  upgradeDescription.className = "tooltiptext";
+  upgradeDescription.innerText = item.description;
+  toolTip.append(upgradeDescription);
+
+  item.element = upgrade;
   item.element.addEventListener("click", () => {
     item.count += 1;
     counter -= item.cost;
     item.cost = Math.round(item.cost * 1.15); // Calculate new cost
-    item.element.innerText =
-      `${item.name} (${item.cost} rocks) (x${item.count})`;
-    minePower += item.rate;
+    if (item.element) {
+      item.element.innerText =
+        `${item.name} (${item.cost} rocks) (x${item.count})`;
+      minePower += item.rate;
+    }
   });
 });
 

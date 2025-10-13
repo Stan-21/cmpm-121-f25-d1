@@ -1,3 +1,3 @@
 # CMPM 121 D1 Project
 
-This is the starting point for your CMPM 121 D1 project. The goal of this project is to create a simple web application using TypeScript, Vite, and modern web development practices. Students should make sure to remove _this_ content from their README.md file and replace it with their own project documentation.
+This project contains a simple clicker game. Mine the boulder to collect rocks! Use the rocks to buy auto miners which help you collect rocks automatically. Collect 10000 rocks for a possible ending?
