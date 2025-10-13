@@ -90,7 +90,7 @@ availableItems.forEach((item) => {
   });
 });
 
-let counter = 9999; // current money / score
+let counter = 0; // current money / score
 let finalUpgradeFlag = false;
 
 buttonElement.addEventListener("click", () => {
