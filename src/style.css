@@ -3,3 +3,9 @@
   vertical-align: top;
   border: 1px solid salmon;
 }
+
+#rock {
+  background-color: rgb(50, 45, 45);
+  width: 64px;
+  height: 64px;
+}
