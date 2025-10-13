@@ -5,7 +5,7 @@ document.body.innerHTML = `
   <p> Rocks Collected: <span id="counter"> 0 </span></p>
   <p> Status: <span id="status"> 0 rocks/sec </span></p>
   <button id = "rock"> 🪨 </button>
-  <button id = "button"> 🪨⛏️ </button>
+  <button id = "button"> ⛏️⛏️ </button>
   <p>
     <button id = "pickUpgrade"> Auto Pick (x0) </button>
     <button id = "drillUpgrade"> Driller (x0) </button>
@@ -79,7 +79,7 @@ function tick() {
 }
 
 let lastTime = performance.now();
-let interval = 1000;
+const interval = 1000;
 let minePower = 0;
 
 function autoClick() {
