@@ -7,9 +7,9 @@ document.body.innerHTML = `
   <button id = "rock"> 🪨 </button>
   <button id = "button"> ⛏️⛏️ </button>
   <p>
-    <button id = "pickUpgrade"> Auto Pick (10 rocks) (x0) </button>
-    <button id = "drillUpgrade"> Driller (100 rocks) (x0) </button>
-    <button id = "bombUpgrade"> Bomber (1000 rocks) (x0) </button>
+    <button id = "pickUpgrade" class = "upgrade"> Auto Pick (10 rocks) (x0) </button>
+    <button id = "drillUpgrade" class = "upgrade"> Driller (100 rocks) (x0) </button>
+    <button id = "bombUpgrade" class = "upgrade"> Bomber (1000 rocks) (x0) </button>
   </p>
 `;
 

@@ -6,6 +6,22 @@
 
 #rock {
   background-color: rgb(50, 45, 45);
+  border-color: black;
+  border-radius: 10%;
   width: 64px;
   height: 64px;
+  font-size: xx-large;
+}
+
+#button {
+  border-radius: 10%;
+  width: 48;
+  height: 48px;
+  font-size: large;
+}
+
+.upgrade {
+  background-color: lightgray;
+  border-color: black;
+  border-radius: 10%;
 }
