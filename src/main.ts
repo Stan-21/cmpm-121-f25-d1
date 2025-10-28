@@ -19,11 +19,11 @@ interface Upgrade {
   element: HTMLButtonElement | null;
 }
 
-const counterElement = document.getElementById("counter")!;
-const statusElement = document.getElementById("status")!;
-const buttonElement = document.getElementById("button")!;
+const counterEl = document.getElementById("counter")!;
+const statusEl = document.getElementById("status")!;
+const buttonEl = document.getElementById("button")!;
 
-const upgradeList = document.getElementById("upgradeList")!;
+const upgradeEl = document.getElementById("upgradeList")!;
 
 const availableItems: Upgrade[] = [
   {
@@ -73,7 +73,7 @@ const availableItems: Upgrade[] = [
 availableItems.forEach((item) => {
   const toolTip = document.createElement("div");
   toolTip.className = "tooltip";
-  upgradeList.append(toolTip);
+  upgradeEl.append(toolTip);
 
   const upgrade = document.createElement("button");
   upgrade.className = "upgrade";
@@ -101,7 +101,7 @@ availableItems.forEach((item) => {
 let counter = 0; // current money / score
 let finalUpgradeFlag = false;
 
-buttonElement.addEventListener("click", () => {
+buttonEl.addEventListener("click", () => {
   click();
 });
 
@@ -148,8 +148,8 @@ function tick() {
   }
   autoClick();
   requestAnimationFrame(tick);
-  counterElement.innerText = counter.toFixed(2).toString();
-  statusElement.innerText = `${minePower.toFixed(2).toString()} rocks/sec`;
+  counterEl.innerText = counter.toFixed(2).toString();
+  statusEl.innerText = `${minePower.toFixed(2).toString()} rocks/sec`;
 }
 
 let lastTime = performance.now();
