@@ -87,9 +87,10 @@ availableItems.forEach((item) => {
   toolTip.className = "tooltip";
   upgradeEl.append(toolTip);
 
-  const upgrade = document.createElement("button");
-  upgrade.className = "upgrade";
-  upgrade.innerText = `${item.name} (${item.cost} rocks) (x${item.count})`;
+  const upgrade = createButton(
+    `${item.name} (${item.cost} rocks) (x${item.count})`,
+    "upgrade",
+  );
   toolTip.append(upgrade);
 
   const upgradeDescription = document.createElement("span");
@@ -126,21 +127,21 @@ function tick() {
       "A new possible upgrade appears...  It's an even bigger bomb.  Buy it (50000 rocks)?  ";
     document.body.append(newText);
 
-    yesButton = document.createElement("button");
+    yesButton = createButton(" yes ");
     yesButton.addEventListener("click", () => {
       counter -= 10000;
       document.body.innerHTML =
         "BOOM!  The mine blows up.  Nothing else can be mined";
     });
-    yesButton.textContent = " yes ";
+
     newText.append(yesButton);
-    noButton = document.createElement("button");
+    noButton = createButton(" no ");
     noButton.addEventListener("click", () => {
       newText.innerHTML = "";
       newText.innerHTML =
         "The bomb fades away and is never seen again.  The idea of what could've been lingers in your head...";
     });
-    noButton.textContent = " no ";
+
     newText.append(noButton);
   }
 
@@ -169,6 +170,13 @@ function autoClick() {
 
 function click() {
   counter += 1;
+}
+
+function createButton(text: string, className: string = ""): HTMLButtonElement {
+  const button = document.createElement("button");
+  button.textContent = text;
+  if (className) button.className = className;
+  return button;
 }
 
 requestAnimationFrame(tick);
