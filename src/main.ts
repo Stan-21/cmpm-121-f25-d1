@@ -1,3 +1,12 @@
+interface Upgrade {
+  name: string;
+  description: string;
+  cost: number;
+  rate: number;
+  count: number;
+  element: HTMLButtonElement | null;
+}
+
 import "./style.css";
 
 document.body.innerHTML = `
@@ -10,20 +19,21 @@ document.body.innerHTML = `
   </p>
 `;
 
-interface Upgrade {
-  name: string;
-  description: string;
-  cost: number;
-  rate: number;
-  count: number;
-  element: HTMLButtonElement | null;
-}
-
 const counterEl = document.getElementById("counter")!;
 const statusEl = document.getElementById("status")!;
 const buttonEl = document.getElementById("button")!;
 
 const upgradeEl = document.getElementById("upgradeList")!;
+
+let yesButton: HTMLButtonElement;
+let noButton: HTMLButtonElement;
+
+let counter = 0; // current money / score
+let finalUpgradeFlag = false;
+
+buttonEl.addEventListener("click", () => {
+  click();
+});
 
 const availableItems: Upgrade[] = [
   {
@@ -70,6 +80,8 @@ const availableItems: Upgrade[] = [
   },
 ];
 
+let minePower = 0;
+
 availableItems.forEach((item) => {
   const toolTip = document.createElement("div");
   toolTip.className = "tooltip";
@@ -97,16 +109,6 @@ availableItems.forEach((item) => {
     }
   });
 });
-
-let counter = 0; // current money / score
-let finalUpgradeFlag = false;
-
-buttonEl.addEventListener("click", () => {
-  click();
-});
-
-let yesButton: HTMLButtonElement;
-let noButton: HTMLButtonElement;
 
 function tick() {
   for (const i of availableItems) {
@@ -154,7 +156,6 @@ function tick() {
 
 let lastTime = performance.now();
 const interval = 1000;
-let minePower = 0;
 
 function autoClick() {
   const currentTime = performance.now();
