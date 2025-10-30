@@ -20,10 +20,18 @@
   font-size: large;
 }
 
+#button:hover {
+  transform: scale(1.1);
+}
+
 .upgrade {
   background-color: lightgray;
   border-color: black;
   border-radius: 10%;
+}
+
+.upgrade:hover {
+  transform: scale(1.1);
 }
 
 .tooltip {
