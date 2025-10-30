@@ -59,3 +59,7 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+body {
+  background-color: lightgray;
+}

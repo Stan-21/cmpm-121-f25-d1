@@ -164,12 +164,14 @@ function autoClick() {
 
   if (elapsedTime >= interval) {
     counter += minePower;
+    spawnSteam();
     lastTime = currentTime - (elapsedTime % interval);
   }
 }
 
 function click() {
   counter += 1;
+  spawnSteam();
 }
 
 function createButton(text: string, className: string = ""): HTMLButtonElement {
@@ -177,6 +179,41 @@ function createButton(text: string, className: string = ""): HTMLButtonElement {
   button.textContent = text;
   if (className) button.className = className;
   return button;
+}
+
+function spawnSteam() {
+  const steam = document.createElement("div");
+  steam.innerText = "🪨";
+  steam.style.textAlign = "center";
+  steam.style.position = "absolute";
+  //steam.style.width = "50px";
+  //steam.style.height = "50px";
+  //steam.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+  //steam.style.borderRadius = "50%";
+  //steam.style.boxShadow = "0 0 15px 8px rgba(255, 255, 255, 0.3)";
+  steam.style.pointerEvents = "none"; // No clicks
+  steam.style.bottom = "800px"; // Rise from just above the floor
+
+  // Random horizontal position across screen width
+  const randomX = Math.random() * 64;
+  steam.style.left = `${randomX}px`;
+
+  // Start opacity and transition
+  steam.style.opacity = "1";
+  steam.style.transition = "transform 3s ease-out, opacity 3s ease-out";
+
+  // Give it upward motion with a little drift
+  const drift = Math.random() * 100 - 50; // -50 to +50px drift
+  setTimeout(() => {
+    steam.style.transform = `translate(-50%, -200px) translateX(${drift}px)`;
+    steam.style.opacity = "0";
+  }, 10);
+
+  setTimeout(() => {
+    if (steam.parentElement) steam.remove();
+  }, 2100);
+
+  document.body.appendChild(steam);
 }
 
 requestAnimationFrame(tick);
