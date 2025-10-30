@@ -164,14 +164,14 @@ function autoClick() {
 
   if (elapsedTime >= interval) {
     counter += minePower;
-    spawnSteam();
+    spawnRock();
     lastTime = currentTime - (elapsedTime % interval);
   }
 }
 
 function click() {
   counter += 1;
-  spawnSteam();
+  spawnRock();
 }
 
 function createButton(text: string, className: string = ""): HTMLButtonElement {
@@ -181,7 +181,7 @@ function createButton(text: string, className: string = ""): HTMLButtonElement {
   return button;
 }
 
-function spawnSteam() {
+function spawnRock() {
   const steam = document.createElement("div");
   steam.innerText = "🪨";
   steam.style.textAlign = "center";
